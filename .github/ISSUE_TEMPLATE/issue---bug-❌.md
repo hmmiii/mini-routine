@@ -1,6 +1,6 @@
 ---
 name: 'issue : Bug ❌'
-about: Create a report to help us improve
+about: "\b처리 해야 할 버그를 알려주세요!"
 title: ''
 labels: ''
 assignees: ''
