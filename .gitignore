@@ -1,0 +1,4 @@
+.venv/
+.idea/
+mini-routine.iml
+__pycache__/
