@@ -13,7 +13,7 @@ assignees: ''
 
 ## Todos
 
-- [] todo
-- [] todo
+- [ ] todo
+- [ ] todo
 
 ## ETC
