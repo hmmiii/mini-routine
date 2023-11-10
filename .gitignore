@@ -2,3 +2,4 @@
 .idea/
 mini-routine.iml
 __pycache__/
+*.db
