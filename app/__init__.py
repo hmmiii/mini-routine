@@ -2,6 +2,7 @@ from flask import Flask
 from app.models import db, db_uri
 from app.login.views import login_bp
 from app.main.views import main_bp
+from app.join.views import join_bp
 
 
 def create_app():
@@ -18,6 +19,7 @@ def create_app():
 
     app.register_blueprint(login_bp)
     app.register_blueprint(main_bp)
+    app.register_blueprint(join_bp)
 
     return app
 
