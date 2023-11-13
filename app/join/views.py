@@ -9,6 +9,7 @@ import os
 #     'sqlite:///' + os.path.join(basedir, 'database.db')
 # db = SQLAlchemy(app)
 
+
 join_bp = Blueprint('join', __name__, template_folder='../../templates')
 
 @join_bp.route('/join', methods=['POST','GET'])
