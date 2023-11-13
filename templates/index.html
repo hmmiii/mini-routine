@@ -1,7 +1,34 @@
 {% include 'header.html' %}
 
-<div>
-    hello world
+<div class="max-w-screen-xl mx-auto p-4">
+    <h3 class="mb-4 font-semibold text-gray-900 dark:text-white">루틴 리스트</h3>
+    <ul class="w-full mb-4 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+        <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
+            <div class="flex items-center ps-3">
+                <input id="checkbox1" type="checkbox" value="" class="mx-2 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                <label for="checkbox1" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Vue JS</label>
+                <button type="button" class="whitespace-nowrap focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">수정</button>
+            </div>
+        </li>
+        <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
+            <div class="flex items-center ps-3">
+                <input id="checkbox2" type="checkbox" value="" class="mx-2 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                <label for="checkbox2" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Vue JS</label>
+                <button type="button" class="whitespace-nowrap focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">수정</button>
+            </div>
+        </li>
+        <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
+            <div class="flex items-center ps-3">
+                <input id="checkbox3" type="checkbox" value="" class="mx-2 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                <label for="checkbox3" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Vue JS</label>
+                <button type="button" class="whitespace-nowrap focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">수정</button>
+            </div>
+        </li>
+    </ul>
+
+    <button type="button" class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">체크</button>
+    <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">등록</button>
+
 </div>
 
 {% include 'footer.html' %}
