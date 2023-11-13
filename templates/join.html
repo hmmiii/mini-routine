@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원 가입</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.1.1/flowbite.min.css" rel="stylesheet" />
+</head>
+
+<body>
+
+    <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+        <div class="text-center dark:text-gray-400 pt-10 pb-10">
+            <h1 class="text-4xl font-bold dark:text-white">회원 가입</h1>
+        </div>
+
+        <!-- form -->
+        <form action="/join" method="POST">
+            <div class="grid gap-5 mb-6">
+                <div>
+                    <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> 아이디</label>
+                    <input type="text" id="id" name="iid"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        required>
+                </div>
+                <div>
+                    <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> 이름
+                    </label>
+                    <input type="text" id="name" name="iname"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        required>
+                </div>
+            </div>
+            <div class="mb-6">
+                <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> 이메일 </label>
+                <input type="email" id="email" name="iemail"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="mirou@miniroutine.com" required>
+            </div>
+            <div class="mb-6">
+                <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> 비밀번호 </label>
+                <input type="password" id="password" name="ipw"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="•••••••••" required>
+            </div>
+            <div class="mb-6">
+                <label for="confirm_password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> 비밀번호 확인 </label>
+                <input type="password" id="confirm_password" name="iconpw"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="•••••••••" required>
+                <h3 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> 비밀번호 확인을 위해 한번 더 입력해주세요 </h3>
+            </div>
+            <button type="submit" onclick="bcheck()"
+                class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium 
+                    rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">회원가입</button>
+        </form>
+    </div>
+
+
+    <script>
+
+        // function icheck() {
+        //     if (document.getElementById('password').value != document.getElementById('confirm_password').value) {
+        //         $('#checkresult').val("비밀번호와 확인란이 일치하지 않습니다!")
+        //     }
+        // }
+
+        // 버튼 클릭시 비밀번호와 비밀번호 확인란 일치여부 체크
+        function bcheck() {
+            if (document.getElementById('password').value != document.getElementById('confirm_password').value) {
+
+                alert("비밀번호와 비밀번호 확인란이 일치하지 않습니다!")
+            }
+        }
+
+    </script>
+</body>
+
+
+</html>
