@@ -3,12 +3,12 @@ from flask_sqlalchemy import SQLAlchemy
 import os
 
 
-basedir = os.path.abspath(os.path.dirname(__file__))
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] =\
-    'sqlite:///' + os.path.join(basedir, 'database.db')
-db = SQLAlchemy(app)
-from app import db, user
+# basedir = os.path.abspath(os.path.dirname(__file__))
+# app = Flask(__name__)
+# app.config['SQLALCHEMY_DATABASE_URI'] =\
+#     'sqlite:///' + os.path.join(basedir, 'database.db')
+# db = SQLAlchemy(app)
+# from app import db, user
 
 join_bp = Blueprint('join', __name__, template_folder='../../templates')
 
@@ -30,7 +30,7 @@ def join() :
     if pw==conpw :
         print(id, name, email, pw, conpw)
     
-    userinfo = user(id=id, username=name, email=email, pw=pw)
-    db.session.add(userinfo)
+    # userinfo = user(id=id, username=name, email=email, pw=pw)
+    # db.session.add(userinfo)
 
     return render_template('join.html')
