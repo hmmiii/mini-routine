@@ -8,7 +8,6 @@ import os
 # app.config['SQLALCHEMY_DATABASE_URI'] =\
 #     'sqlite:///' + os.path.join(basedir, 'database.db')
 # db = SQLAlchemy(app)
-# from app import db, user
 
 join_bp = Blueprint('join', __name__, template_folder='../../templates')
 
