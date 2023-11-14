@@ -48,6 +48,6 @@ def join() :
 
 
     
-    context = {"rowa" : rowa}
+    context = {"title" : "회원 가입", "rowa" : rowa}
 
     return render_template('join.html', data = context)
