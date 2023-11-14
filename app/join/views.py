@@ -3,11 +3,6 @@ import sqlite3
 
 join_bp = Blueprint('join', __name__, template_folder='../../templates')
 
-# cona = sqlite3.connect('app\database.db')
-# cursora = cona.cursor()
-# querya = "SELECT * FROM user"
-# cursora.execute(querya)
-# rowsa = cursora.fetchall()
 
 @join_bp.route('/join', methods=['POST','GET'])
 def join() :
@@ -35,19 +30,20 @@ def join() :
 
         select_id = "SELECT * FROM user WHERE id=?"
         cursor.execute(select_id, (id,))
-        rows = cursor.fetchall()
-        for row in rows :
-            if row[0] is not None :
-                bid = row[0]
-                print(row)
-            else :
-                if pw==conpw :
-                    print(id, name, email, pw, conpw)
-                else:
-                    print("비밀번호와 비밀번호 확인란이 일치하지 않습니다!")
+        rows = cursor.fetchone()
 
+        if rows is not None :
+            # 아이디 중복으로 회원가입 막기
+            print(rows)
+        else :
+            if pw==conpw :
+                insert_data = {(id, name, email, pw)}
+                insert_query = "INSERT INTO user (id, username, email, pw) VALUES (?, ?, ?, ?)"
+                cursor.executemany(insert_query, insert_data)
+                conn.commit()
+                conn.close()
+                return render_template('index.html', data = id)
 
-    
     context = {"title" : "회원 가입", "rowa" : rowa}
 
     return render_template('join.html', data = context)
