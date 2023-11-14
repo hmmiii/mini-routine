@@ -4,6 +4,7 @@ from app.login.views import login_bp
 from app.main.views import main_bp
 from app.join.views import join_bp
 from app.add.views import add_bp
+from app.edit.views import edit_bp
 
 
 def create_app():
@@ -22,6 +23,7 @@ def create_app():
     app.register_blueprint(main_bp)
     app.register_blueprint(join_bp)
     app.register_blueprint(add_bp)
+    app.register_blueprint(edit_bp)
 
     return app
 
