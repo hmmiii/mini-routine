@@ -1,16 +1,13 @@
-from flask import Flask, render_template, Blueprint, request
-from flask_sqlalchemy import SQLAlchemy
-import os
-
-
-# basedir = os.path.abspath(os.path.dirname(__file__))
-# app = Flask(__name__)
-# app.config['SQLALCHEMY_DATABASE_URI'] =\
-#     'sqlite:///' + os.path.join(basedir, 'database.db')
-# db = SQLAlchemy(app)
-
+from flask import render_template, Blueprint, request
+import sqlite3
 
 join_bp = Blueprint('join', __name__, template_folder='../../templates')
+
+conn = sqlite3.connect('app\database.db')
+cursor = conn.cursor()
+query = "SELECT * FROM user"
+cursor.execute(query)
+rows = cursor.fetchall()
 
 @join_bp.route('/join', methods=['POST','GET'])
 def join() :
@@ -19,7 +16,10 @@ def join() :
     email = ""
     pw = ""
     conpw = ""
-    
+
+    for row in rows :
+        print(row)
+
     if request.method == 'POST' :
         id = request.form['iid']
         name = request.form['iname']
@@ -30,7 +30,6 @@ def join() :
     if pw==conpw :
         print(id, name, email, pw, conpw)
     
-    # userinfo = user(id=id, username=name, email=email, pw=pw)
-    # db.session.add(userinfo)
+
 
     return render_template('join.html')
