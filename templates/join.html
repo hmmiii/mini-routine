@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -8,7 +8,9 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.1.1/flowbite.min.css" rel="stylesheet" />
 </head>
 
-<body>
+<body> -->
+
+    {% include 'header.html' %}
 
     <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
         <div class="text-center dark:text-gray-400 pt-10 pb-10">
@@ -19,14 +21,13 @@
         <form action="/join" method="POST">
             <div class="grid gap-5 mb-6">
                 <div>
-                    <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> 아이디</label>
+                    <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">아이디</label>
                     <input type="text" id="id" name="iid"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         required>
                 </div>
                 <div>
-                    <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> 이름
-                    </label>
+                    <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> 이름 </label>
                     <input type="text" id="name" name="iname"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         required>
@@ -69,12 +70,20 @@
         // 버튼 클릭시 비밀번호와 비밀번호 확인란 일치여부 체크
         function bcheck() {
             if (document.getElementById('password').value != document.getElementById('confirm_password').value) {
-
                 alert("비밀번호와 비밀번호 확인란이 일치하지 않습니다!")
             }
         }
 
+        // function idcheck() {
+        //     if (document.getElementById('id').value != {{ data }}) {
+
+        //         alert("비밀번호와 비밀번호 확인란이 일치하지 않습니다!")
+        //     }
+        // }
+
     </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </body>
 
 
