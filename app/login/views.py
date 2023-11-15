@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, Flask, request,make_response,session
 
+
 login_bp = Blueprint('login', __name__, template_folder='../../templates')
 
 
@@ -17,6 +18,54 @@ def join():
     }
     return render_template('join.html', data=context)
 
+@login_bp.route('/index')
+def index():
+    context = {
+        'title': '미니 루틴 로그인'
+    }
+    return render_template('index.html', data=context)
+
+app = Flask(__name__)
+app.secret_key = "My_Secret_Key"
+
+@app.route("/")
+def home():
+    return render_template('index.html')
+
+@app.route("/setcookie", methods=["POST", "GET"])
+def setcookie():
+    if request.method == 'POST':
+        receive_id = request.form['id']
+        session['id'] = receive_id     # 여기
+        print(receive_id)
+        print(session['id'])
+
+    resp = make_response(render_template('read_cookie.html'))
+    resp.set_cookie('id', receive_id)
+    return resp
+
+
+@app.route("/getcookie")
+def getcookie():
+    user_id = request.cookies.get('id')
+    print(id)
+    # print(session['user_id'])
+    return f'<h1>welcome {id}님</h1>'
+
+
+if __name__ == '__main__':
+    app.run(host='127.0.0.1', port=5000, debug=True)
+
+
+
+
+
+
+
+
+
+
+
 # # sessionStorage를 사용하려면 secret key 값을 주어야 한다.
 # MYSECRET = 'this is my key'
 # login_bp.secret_key = MYSECRET
@@ -28,8 +77,8 @@ def join():
 #     return res
 
 
-# make_response를 사용해서 cookie를 set한 페이지를 쉽게 반환해보자
-# make_response(render_template('index.html'))처럼 page를 반환할수 있다.
+# # make_response를 사용해서 cookie를 set한 페이지를 쉽게 반환해보자
+# # make_response(render_template('index.html'))처럼 page를 반환할수 있다.
 
 # @login_bp.route('/setcookie')
 # def set_cookie():

@@ -94,14 +94,16 @@
                         <div id="alert_password" class="form_text_alert"></div>
                     </div>
                 </div>
-                
+
                 <div style="height: 10px;"></div>
 
                 <div class="form_submit_button" role="group">
-                    <button type="button" class="px-4 py-2 text-sm font-medium text-gray-900 bg-transparent border border-gray-900 rounded-s-lg hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700" 
-                    onclick="login()">Login</button>
-                    <button type="button" class="px-4 py-2 text-sm font-medium text-gray-900 bg-transparent border border-gray-900 rounded-s-lg hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700" 
-                    onclick="location.href='/join'">Join</button>
+                    <button type="button"
+                        class="px-4 py-2 text-sm font-medium text-gray-900 bg-transparent border border-gray-900 rounded-s-lg hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700"
+                        onclick="login()">Login</button>
+                    <button type="button"
+                        class="px-4 py-2 text-sm font-medium text-gray-900 bg-transparent border border-gray-900 rounded-s-lg hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700"
+                        onclick="location.href='/join'">Join</button>
                 </div>
             </form>
         </div>
@@ -135,10 +137,21 @@
 
 
         if (chkId && chkPw) {
-            console.log('complete. form.submit();');
-            //form.submit();
+
+        let id = document.getElementById("id");
+        let pw = document.getElementById("pw");
+            // 이메일정보가 입력되는 input tag의 id(혹은 class)를 불러온다.
+
+        sessionStorage.setItem("id", id.value);
+        sessionStorage.setItem("pw", pw.value);
+            // sessionStorage에 해당 정보의 값을 저장한다.
+        console.log(location.href='/');
         }
+
+        
+
     }
+
 
     function checkValidId(form) {
         if (form.Id.value == "") {
@@ -148,6 +161,7 @@
         }
 
         return true;
+        
     }
 
     function checkValidPassword(form) {
@@ -181,7 +195,9 @@
         }
 
         return true;
+        
     }
+
 </script>
 
 {% include 'footer.html' %}
