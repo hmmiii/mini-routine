@@ -9,7 +9,7 @@ db_uri = f'sqlite:///{db_path}'
 class User(db.Model):
     id = db.Column(db.String(100), primary_key=True)
     username = db.Column(db.String(100), nullable=False)
-    email = db.Column(db.String(100), unique=True, nullable=False)
+    email = db.Column(db.String(100), nullable=False)
     pw = db.Column(db.String(100), nullable=False)
 
     def __repr__(self):
