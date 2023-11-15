@@ -1,0 +1,187 @@
+{% include 'header.html' %}
+
+<style>
+    .main_container {
+        border: 0px solid;
+    }
+
+    .login_container {
+        width: 400px;
+        height: 400px;
+        margin: auto;
+        border-radius: 3px;
+        box-shadow: 0px 0px 20px #000;
+    }
+
+    .form_container {
+        width: 300px;
+        margin: auto;
+    }
+
+    .form_title_div {
+        margin: auto;
+        text-align: center;
+    }
+
+    .form_title_p {
+        font-weight: bold;
+        font-size: 25px;
+        display: inline-block;
+        padding-top: 8px;
+        text-align: center;
+    }
+
+    .form_input {
+        width: 98%;
+        height: 40px;
+        border: 1px solid;
+        border-radius: 3px;
+        border-color: gray;
+    }
+
+    .form_item_name {
+        color: gray;
+    }
+
+    .form_text_alert {
+        height: 20px;
+    }
+
+    .form_text_alert_padding {
+        padding-bottom: 10px;
+    }
+
+    .form_submit_button {
+        width: 100%;
+        height: 44px;
+        border: 1px;
+        border-radius: 3px;
+        color: white;
+        font-size: 20px;
+        font-weight: 500;
+    }
+</style>
+
+<div id="container" class="main_container">
+    <div style="padding: 50px;"></div>
+    <div class="login_container">
+        <div class="form_container">
+            <form user="login_form" action="/cookie" method="get">
+                <div class="form_title_div">
+                    <p class="form_title_p">로그인</p>
+                </div>
+
+                <div>
+                    <div>
+                        <a class="form_item_name">ID</a>
+                    </div>
+                    <div>
+                        <input type="text" name="ID" placeholder="Enter id" class="form_input" />
+                    </div>
+                    <div class="form_text_alert_padding">
+                        <div id="alert_ID" class="form_text_alert"></div>
+                    </div>
+                </div>
+
+                <div>
+                    <div>
+                        <a class="form_item_name">PASSWORD</a>
+                    </div>
+                    <div>
+                        <input type="password" name="password" placeholder="Enter password" class="form_input" />
+                    </div>
+                    <div class="form_text_alert_padding">
+                        <div id="alert_password" class="form_text_alert"></div>
+                    </div>
+                </div>
+                
+                <div style="height: 10px;"></div>
+
+                <div class="form_submit_button" role="group">
+                    <button type="button" class="px-4 py-2 text-sm font-medium text-gray-900 bg-transparent border border-gray-900 rounded-s-lg hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700" 
+                    onclick="login()">Login</button>
+                    <button type="button" class="px-4 py-2 text-sm font-medium text-gray-900 bg-transparent border border-gray-900 rounded-s-lg hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700" 
+                    onclick="location.href='/join'">Join</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    function login() {
+        const form = document.login_form;
+        const chkId = checkValidId(form);
+        const chkPw = checkValidPassword(form);
+
+        if (chkId) {
+            document.getElementById('alert_ID').innerText = "";
+            form.Id.style.border = '2px solid';
+            form.Id.style.borderColor = '#00D000';
+        } else {
+            form.Id.style.border = '2px solid';
+            form.Id.style.borderColor = '#FF0000';
+            document.getElementById('alert_ID').style.color = '#FF0000';
+        }
+
+        if (chkPw) {
+            document.getElementById('alert_password').innerText = "";
+            form.password.style.border = '2px solid';
+            form.password.style.borderColor = '#00D000';
+        } else {
+            form.password.style.border = '2px solid';
+            form.password.style.borderColor = '#FF0000';
+            document.getElementById('alert_password').style.color = '#FF0000';
+        }
+
+
+        if (chkId && chkPw) {
+            console.log('complete. form.submit();');
+            //form.submit();
+        }
+    }
+
+    function checkValidId(form) {
+        if (form.Id.value == "") {
+            document.getElementById('alert_ID').innerText = "Please enter ID.";
+            //form.ID.focus();
+            return false;
+        }
+
+        return true;
+    }
+
+    function checkValidPassword(form) {
+        if (form.password.value == "") {
+            document.getElementById('alert_password').innerText = "Please enter password.";
+            //form.password.focus();
+            return false;
+        }
+
+        const pw = form.password.value;
+        // String.prototype.search() :: 검색된 문자열 중에 첫 번째로 매치되는 것의 인덱스를 반환한다. 찾지 못하면 -1 을 반환한다.
+        // number
+        const num = pw.search(/[0-9]/g);
+        // alphabet
+        const eng = pw.search(/[a-z]/ig);
+        // special characters
+        const spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
+
+        if (pw.length < 6) {
+            // 최소 6문자.
+            document.getElementById('alert_password').innerText = "비밀번호의 길이는 최소 6자 이상이여야 합니다";
+            return false;
+        } else if (pw.search(/\s/) != -1) {
+            // 공백 제거.
+            document.getElementById('alert_password').innerText = "비밀번호는 공백이 포함될 수 없습니다";
+            return false;
+        } else if (num < 0 && eng < 0 && spe < 0) {
+            // 한글과 같은 문자열 입력 방지.
+            document.getElementById('alert_password').innerText = "비밀번호가 유효하지 않습니다";
+            return false;
+        }
+
+        return true;
+    }
+</script>
+
+{% include 'footer.html' %}
