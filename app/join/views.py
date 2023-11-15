@@ -1,8 +1,10 @@
 from flask import render_template, Blueprint, request
 import sqlite3
+# DB사용하기 위해 import
+from app.models import User, db
 
+# 프로젝트 루트 디렉토리 경로
 join_bp = Blueprint('join', __name__, template_folder='../../templates')
-
 
 @join_bp.route('/join', methods=['POST','GET'])
 def join() :
@@ -13,13 +15,6 @@ def join() :
     conpw = ""
     bid = ""
 
-    conn = sqlite3.connect('app\database.db')
-    cursor = conn.cursor()
-
-    query = "SELECT id FROM user"
-    cursor.execute(query)
-    rowa = cursor.fetchall()
-
     # input POST 자료 받아옴
     if request.method == 'POST' :
         id = request.form['iid']
@@ -28,22 +23,17 @@ def join() :
         pw = request.form['ipw']
         conpw = request.form['iconpw']
 
-        select_id = "SELECT * FROM user WHERE id=?"
-        cursor.execute(select_id, (id,))
-        rows = cursor.fetchone()
+        rows = User.query.filter_by(id=id).first()
 
         if rows is not None :
             # 아이디 중복으로 회원가입 막기
             print(rows)
         else :
             if pw==conpw :
-                insert_data = {(id, name, email, pw)}
-                insert_query = "INSERT INTO user (id, username, email, pw) VALUES (?, ?, ?, ?)"
-                cursor.executemany(insert_query, insert_data)
-                conn.commit()
-                conn.close()
+                data = User(id = id, username = name, email = email, pw = pw)
+                db.session.add(data)
+                db.session.commit()
                 return render_template('index.html', data = id)
 
-    context = {"title" : "회원 가입", "rowa" : rowa}
-
+    context = {"title" : "회원 가입"}
     return render_template('join.html', data = context)
