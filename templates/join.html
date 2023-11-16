@@ -12,14 +12,14 @@
 
     {% include 'header.html' %}
 
-    <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+    <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 mb-6">
         <div class="text-center dark:text-gray-400 pt-10 pb-10">
             <h1 class="text-4xl font-bold dark:text-white">회원 가입</h1>
         </div>
 
         <!-- form -->
-        <form action="/join" method="POST">
-            <div class="grid gap-5 mb-6">
+        <form id="joinform" action="/join" method="POST" class="mb-6">
+            <div class="grid gap-6 mb-6">
                 <div>
                     <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">아이디</label>
                     <input type="text" id="id" name="iid"
@@ -27,64 +27,108 @@
                         required>
                 </div>
                 <div>
+                    <button id="idbutton" name="idbutton" type="button" onclick="checkid()"
+                    class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium 
+                            rounded-lg text-sm px-5 py-2.5 me-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">아이디 중복 확인</button>
+                </div>
+                    <div>
                     <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> 이름 </label>
                     <input type="text" id="name" name="iname"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         required>
                 </div>
+                <div>
+                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> 이메일 </label>
+                    <input type="email" id="email" name="iemail"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="mirou@miniroutine.com" required>
+                </div>
+                <div>
+                    <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> 비밀번호 </label>
+                    <input type="password" id="password" name="ipw"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="•••••••••" required>
+                </div>
+                <div>
+                    <label for="confirm_password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> 비밀번호 확인 </label>
+                    <input type="password" id="confirm_password" name="iconpw"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="•••••••••" required>
+                    <h3 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> 비밀번호 확인을 위해 한번 더 입력해주세요! </h3>
+                </div>
+                <button type="button" onclick="bcheck()"
+                    class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium 
+                        rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">회원가입</button>
             </div>
-            <div class="mb-6">
-                <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> 이메일 </label>
-                <input type="email" id="email" name="iemail"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="mirou@miniroutine.com" required>
-            </div>
-            <div class="mb-6">
-                <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> 비밀번호 </label>
-                <input type="password" id="password" name="ipw"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="•••••••••" required>
-            </div>
-            <div class="mb-6">
-                <label for="confirm_password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> 비밀번호 확인 </label>
-                <input type="password" id="confirm_password" name="iconpw"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="•••••••••" required>
-                <h3 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> 비밀번호 확인을 위해 한번 더 입력해주세요 </h3>
-            </div>
-            <button type="submit" onclick="bcheck()"
-                class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium 
-                    rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">회원가입</button>
-        </form>
+        </form>   
     </div>
 
 
     <script>
+        idbutton=""
+        idbuttonok=""
 
-        // function icheck() {
-        //     if (document.getElementById('password').value != document.getElementById('confirm_password').value) {
-        //         $('#checkresult').val("비밀번호와 확인란이 일치하지 않습니다!")
-        //     }
-        // }
+        // '아이디 중복 확인' 버튼 클릭시 중복되는 아이디 있는지 점검
+        function checkid() {
+            id = document.getElementById('id').value
+            idl = {"id" : id}
 
-        // 버튼 클릭시 비밀번호와 비밀번호 확인란 일치여부 체크
-        function bcheck() {
-            if (document.getElementById('password').value != document.getElementById('confirm_password').value) {
-                alert("비밀번호와 비밀번호 확인란이 일치하지 않습니다!")
+            // 아이디 input이 비어있을 경우
+            if (id.trim()===""){
+                alert("아이디를 입력해주세요!")
             }
+            // 아이디 input에 입력된 값이 있을 경우
+            else {
+                fetch('/checkid', {
+                    method: 'POST',
+                    headers: {'Content-Type' : 'application/json'},
+                    body: JSON.stringify(idl)
+                }).then(response => response.json()).then(data => {
+                    // 중복된 아이디가 있을 경우 (경고창 띄움)
+                    if (data.status === 'exist') {
+                        alert("아이디 중복 (다른 아이디로 가입해주세요!)")
+                    } 
+                    // 중복된 아이디가 없을 경우 (버튼과 input 비활성화)
+                    else {
+                        document.getElementById("id").readOnly = true
+                        idbutton = document.getElementById("idbutton")
+                        idbutton.disabled = true
+                        idbutton.innerHTML = "아이디 중복 확인 완료"
+                        idbutton.style.backgroundColor = "grey"
+                        alert("사용 가능한 아이디입니다.")
+                        idbuttonok = document.getElementById('idbutton').innerHTML
+                    }
+                })
+            }
+
         }
-
-        // function idcheck() {
-        //     if (document.getElementById('id').value != {{ data }}) {
-
-        //         alert("비밀번호와 비밀번호 확인란이 일치하지 않습니다!")
-        //     }
-        // }
+        
+        // '회원가입' 버튼 클릭시 아이디 중복, 비밀번호 일치여부 확인
+        function bcheck() {
+            // 아이디 중복 확인 체크
+            if (idbuttonok==="아이디 중복 확인 완료") {
+                // 비밀번호 일치여부 체크
+                if (document.getElementById('password').value != document.getElementById('confirm_password').value) {
+                    alert("비밀번호와 비밀번호 확인란이 일치하지 않습니다!")
+                }
+                // 아이디 중복 확인 & 비밀번호 일치일 경우 회원가입 완료! (DB에 등록)
+                else {
+                    form = document.getElementById('joinform')
+                    form.submit()
+                    alert("회원가입 완료! (로그인 후 사용해주세요)")
+                }
+            }
+            // 아이디 중복 미확인 -> 확인요청 경고창
+            else {
+                alert("아이디 중복 확인 후 가입해주세요!")
+            }
+            // joinresult = "{{ data.joinresult }}"
+            // alert(joinresult)
+        }
 
     </script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-</body>
 
 
-</html>
+    {% include 'footer.html' %}
