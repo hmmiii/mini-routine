@@ -1,5 +1,5 @@
 from flask import Flask
-from app.models import db, db_uri
+from app.models import db, db_uri, Routine
 from app.login.views import login_bp
 from app.main.views import main_bp
 from app.join.views import join_bp
@@ -18,6 +18,12 @@ def create_app():
 
     with app.app_context():
         db.create_all()
+        # 모든 루틴의 check를 0으로 초기화
+        routines = Routine.query.all()
+        for routine in routines:
+            routine.check = 0
+            db.session.add(routine)
+            db.session.commit()
 
     app.register_blueprint(login_bp)
     app.register_blueprint(main_bp)
