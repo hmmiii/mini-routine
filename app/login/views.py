@@ -1,22 +1,26 @@
 from flask import Blueprint, render_template, request, session
 from app.models import User
-
+app.secret_key = 'my_secret_key'
 login_bp = Blueprint('login', __name__, template_folder='../../templates')
 
 
 @login_bp.route('/login', methods=["POST", "GET"])
 def login():
-    if request.method == 'post':
+    context = {
+    'title': '미니 루틴 로그인'
+    }
+    if request.method == 'POST':
         userid = request.args.get('')
         userpassword = request.args.get('')
         user = User.query.filter_by(id=userid).first()
 
         if user and user.pw == userpassword:
-            return render_template('index.html')
+            return render_template('index.html', data=context)
         else:
-            message = '올바른 정보를 입력하세요'
-    if request.method == 'get':
-        return render_template('login.html')
+            return '올바른 정보를 입력하세요'
+
+    if request.method == 'GET':
+        return render_template('login.html', data=context)
 
 
 # app = Flask(__name__)
