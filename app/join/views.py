@@ -19,29 +19,26 @@ def checkid() :
 
 @join_bp.route('/join', methods=['POST','GET'])
 def join() :
-    joinresult = ""
-
     # input POST 자료 받아옴
     if request.method == 'POST' :
         id = request.form['iid']
         name = request.form['iname']
         email = request.form['iemail']
         pw = request.form['ipw']
-        conpw = request.form['iconpw']
+        # conpw = request.form['iconpw']
 
-        rows = User.query.filter_by(id=id).first()
+        # rows = User.query.filter_by(id=id).first()
 
-        if rows is not None :
-            print(rows)
-        else :
-            if pw==conpw :
-                data = User(id = id, username = name, email = email, pw = pw)
-                db.session.add(data)
-                db.session.commit()
-                joinresult = "회원가입 완료! (로그인 후 사용해주세요)"
+        # if rows is not None :
+        #     print(rows)
+        # else :
+        #     if pw==conpw :
+        data = User(id = id, username = name, email = email, pw = pw)
+        db.session.add(data)
+        db.session.commit()
                 # return render_template('index.html')
 
-    context = {"title" : "회원 가입", "joinresult" : joinresult}
+    context = {"title" : "회원 가입"}
     return render_template('join.html', data = context)
 
     
