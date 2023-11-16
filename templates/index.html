@@ -1,34 +1,48 @@
 {% include 'header.html' %}
-
 <div class="max-w-screen-xl mx-auto p-4">
     <h3 class="mb-4 font-semibold text-gray-900 dark:text-white">루틴 리스트</h3>
     <ul class="w-full mb-4 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+        {% for routine in data['routines'] %}
         <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
-            <div class="flex items-center ps-3">
-                <input id="checkbox1" type="checkbox" value="" class="mx-2 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                <label for="checkbox1" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Vue JS</label>
-                <button type="button" class="whitespace-nowrap focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">수정</button>
-            </div>
+            <form action="/edit/{{routine.rNum}}" method="get" class="flex items-center ps-3">
+                <input id="chk{{routine.rNum}}" {% if routine.check %} checked {% else %}  {% endif %} type="checkbox" value="" class="mx-2 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                <label for="chk{{routine.rNum}}" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{routine.content}}</label>
+                <input type="hidden" name="rnum" value="{{routine.rNum}}">
+                <button class="whitespace-nowrap focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">수정</button>
+            </form>
         </li>
-        <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
-            <div class="flex items-center ps-3">
-                <input id="checkbox2" type="checkbox" value="" class="mx-2 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                <label for="checkbox2" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Vue JS</label>
-                <button type="button" class="whitespace-nowrap focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">수정</button>
-            </div>
-        </li>
-        <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
-            <div class="flex items-center ps-3">
-                <input id="checkbox3" type="checkbox" value="" class="mx-2 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                <label for="checkbox3" class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Vue JS</label>
-                <button type="button" class="whitespace-nowrap focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">수정</button>
-            </div>
-        </li>
+        {% endfor %}
     </ul>
-
-    <button type="button" class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">체크</button>
-    <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">등록</button>
-
+    <button type="button" onclick="checkboxClicked()" class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">체크</button>
+    <button type="button" onclick="addButtonClicked()" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">등록</button>
 </div>
+<script>
+    function addButtonClicked() {
+        window.location.href = "/add";
+    }
 
+    function checkboxClicked() {
+        const chkData = []
+        const chkList = document.querySelectorAll('input[type="checkbox"]');
+        chkList.forEach((chk) => {
+            chkData.push({
+                rNum: chk.id.replace('chk', ''),
+                check: chk.checked
+            });
+        })
+        fetch('/check', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        // 본문 데이터를 추가하려면 이곳에 추가하세요.
+        body: JSON.stringify(chkData)
+        })
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    }
+</script>
 {% include 'footer.html' %}
