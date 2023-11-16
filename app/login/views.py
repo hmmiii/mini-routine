@@ -11,8 +11,8 @@ def login():
     }
 
     if request.method == 'POST':
-        userid = request.args.get('')
-        userpassword = request.args.get('')
+        userid = request.args.get('id') 
+        userpassword = request.args.get('password') 
         user = User.query.filter_by(id=userid).first()
 
         if user and user.pw == userpassword:
