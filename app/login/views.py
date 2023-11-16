@@ -6,7 +6,13 @@ login_bp = Blueprint('login', __name__, template_folder='../../templates')
 
 @login_bp.route('/login', methods=["POST", "GET"])
 def login():
-    if request.method == 'post':
+
+    context = {
+        'title': '미니루틴 로그인',
+        'message': ''
+    }
+
+    if request.method == 'POST':
         userid = request.args.get('')
         userpassword = request.args.get('')
         user = User.query.filter_by(id=userid).first()
@@ -14,9 +20,9 @@ def login():
         if user and user.pw == userpassword:
             return render_template('index.html')
         else:
-            message = '올바른 정보를 입력하세요'
-    if request.method == 'get':
-        return render_template('login.html')
+            context['message'] = '올바른 정보를 입력하세요'
+    if request.method == 'GET':
+        return render_template('login.html', data=context)
 
 
 # app = Flask(__name__)
