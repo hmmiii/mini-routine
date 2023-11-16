@@ -1,5 +1,10 @@
-from flask import Blueprint, render_template, request, session
+from flask import Blueprint, render_template, request, session, Flask
 from app.models import User
+
+app = Flask(__name__)
+
+MYSECRET = 'this is my key'
+app.secret_key = MYSECRET
 
 login_bp = Blueprint('login', __name__, template_folder='../../templates')
 
@@ -15,18 +20,32 @@ def login():
         userid = request.form.get('id') 
         userpassword = request.form.get('password') 
         user = User.query.filter_by(id=userid).first()
+        # key = request.form['id']
+        # value = request.form['password']
 
         if user and user.pw == userpassword:
+            # session['id']=request.form['id']
+            session['id']=request.form['id']
+
             return render_template('index.html', data=context)
         else:
             context['message'] = '올바른 정보를 입력하세요'
             return render_template('login.html', data=context)
-    if request.method == 'GET':
+        
+    if request.method == 'GET':  
         return render_template('login.html', data=context)
 
 
-# app = Flask(__name__)
-# app.secret_key = "My_Secret_Key"
+# # session storage에 값 저장하기
+# @login_bp.route('/setsessiondata',methods=['POST'])
+# def set_session_data():
+# 	key = request.form['key']
+#     value = request.form['value']
+# 	session[key] = value
+#     return '저장되었습니다.'
+
+
+
 
 # @app.route("/")
 # def home():
