@@ -110,6 +110,9 @@
     </div>
 </div>
 <script>
+    {% if data['message'] %}
+    alert('{{data['message']}}');
+    {% endif %}
     function login() {
         const form = document.getElementById('login_form')
 
