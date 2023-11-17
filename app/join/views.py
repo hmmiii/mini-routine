@@ -1,4 +1,4 @@
-from flask import render_template, Blueprint, request, jsonify, g, session
+from flask import render_template, Blueprint, request, jsonify, redirect, session
 
 # DB사용하기 위해 import
 from app.models import User, db
@@ -25,21 +25,19 @@ def join() :
         name = request.form['iname']
         email = request.form['iemail']
         pw = request.form['ipw']
-        # conpw = request.form['iconpw']
 
-        # rows = User.query.filter_by(id=id).first()
-
-        # if rows is not None :
-        #     print(rows)
-        # else :
-        #     if pw==conpw :
         data = User(id = id, username = name, email = email, pw = pw)
         db.session.add(data)
         db.session.commit()
-                # return render_template('index.html')
+
+        return  redirect('/login')
 
     context = {"title" : "회원 가입"}
-    return render_template('join.html', data = context)
+    userid = session.get('userid', 'Guest')
+    print(userid)
+
+    if userid == 'Guest' : return render_template('join.html', data = context)
+    else : return redirect('/') 
 
     
 
