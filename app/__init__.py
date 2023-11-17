@@ -6,10 +6,9 @@ from app.join.views import join_bp
 from app.add.views import add_bp
 from app.edit.views import edit_bp
 
-
 def create_app():
     app = Flask(__name__)
-
+    app.secret_key = 'your_secret_key_here'
     # 데이터베이스 URI 설정
     app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
 
