@@ -27,3 +27,8 @@
   - 회고
 
 ## 🖥️ 사용 스택
+<img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=Python&logoColor=white" style="height: 25px"/>
+<img src="https://img.shields.io/badge/Tailwind-06B6D4?style=flat-square&logo=Tailwind CSS&logoColor=white" style="height: 25px"/>
+<img src="https://img.shields.io/badge/SQLite-003B57?style=flat-square&logo=SQLite&logoColor=white" style="height: 25px"/>
+<img src="https://img.shields.io/badge/Flask-000000?style=flat-square&logo=Flask&logoColor=white" style="height: 25px"/>
+<img src="https://img.shields.io/badge/Java Script-F7DF1E?style=flat-square&logo=javaScript&logoColor=white" style="height: 25px"/>
