@@ -1,13 +1,7 @@
-from flask import Blueprint, render_template, request, session, Flask
+from flask import Blueprint, render_template, request, session, Flask, redirect, url_for
 from app.models import User
 
-app = Flask(__name__)
-
-MYSECRET = 'this is my key'
-app.secret_key = MYSECRET
-
 login_bp = Blueprint('login', __name__, template_folder='../../templates')
-
 
 @login_bp.route('/login', methods=["POST", "GET"])
 def login():
@@ -17,17 +11,18 @@ def login():
     }
 
     if request.method == 'POST':
-        userid = request.form.get('id') 
+        userid = request.form.get('id')
         userpassword = request.form.get('password') 
         user = User.query.filter_by(id=userid).first()
+        
         # key = request.form['id']
-        # value = request.form['password']
+        # value = request.form['value']
 
         if user and user.pw == userpassword:
             # session['id']=request.form['id']
-            session['id']=request.form['id']
-
-            return render_template('index.html', data=context)
+            # session[key] = value
+            session['userid'] = userid
+            return  render_template('index.html', data=context)
         else:
             context['message'] = '올바른 정보를 입력하세요'
             return render_template('login.html', data=context)
