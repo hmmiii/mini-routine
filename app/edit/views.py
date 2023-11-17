@@ -3,8 +3,10 @@ from app.models import db, Routine
 
 # 프로젝트 루트 디렉토리 경로
 edit_bp = Blueprint('edit', __name__, template_folder='../../templates')
-@edit_bp.route('/edit/<int:rNum>', methods=('GET', 'POST'))
-def edit(rNum):
+@edit_bp.route('/edit', methods=('GET', 'POST'))
+def edit():
+    rNum = request.args.get("rnum")
+
     if request.method == 'POST':
         content_receive = request.form.get("content")
 
@@ -27,4 +29,16 @@ def edit(rNum):
     # print(routine_list[0].content)
 
     return render_template('edit.html', data=context)
+
+
+@edit_bp.route('/delete', methods=['POST'])
+def delete():
+    data = request.get_json()
+    print(data['rNum'])
+
+    delete_data = Routine.query.filter_by(rNum=data['rNum']).first()
+    db.session.delete(delete_data)
+    db.session.commit()
+    
+    return 'OK'
 
