@@ -14,15 +14,10 @@ def login():
         userid = request.form.get('id')
         userpassword = request.form.get('password') 
         user = User.query.filter_by(id=userid).first()
-        
-        # key = request.form['id']
-        # value = request.form['value']
 
         if user and user.pw == userpassword:
-            # session['id']=request.form['id']
-            # session[key] = value
             session['userid'] = userid
-            return  render_template('index.html', data=context)
+            return  redirect('/')
         else:
             context['message'] = '올바른 정보를 입력하세요'
             return render_template('login.html', data=context)
