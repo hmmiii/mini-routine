@@ -25,18 +25,13 @@ def join() :
         name = request.form['iname']
         email = request.form['iemail']
         pw = request.form['ipw']
-        # conpw = request.form['iconpw']
 
-        # rows = User.query.filter_by(id=id).first()
-
-        # if rows is not None :
-        #     print(rows)
-        # else :
-        #     if pw==conpw :
         data = User(id = id, username = name, email = email, pw = pw)
         db.session.add(data)
         db.session.commit()
-                # return render_template('index.html')
+
+        rencontext = {'title': '미니루틴 로그인', 'message' : ''}
+        return render_template('login.html', data = rencontext)
 
     context = {"title" : "회원 가입"}
     return render_template('join.html', data = context)
