@@ -1,4 +1,4 @@
-from flask import render_template, Blueprint, request, jsonify, redirect
+from flask import render_template, Blueprint, request, jsonify, redirect, session
 
 # DB사용하기 위해 import
 from app.models import User, db
@@ -33,7 +33,11 @@ def join() :
         return  redirect('/login')
 
     context = {"title" : "회원 가입"}
-    return render_template('join.html', data = context)
+    userid = session.get('userid', 'Guest')
+    print(userid)
+
+    if userid == 'Guest' : return render_template('join.html', data = context)
+    else : return redirect('/') 
 
     
 
